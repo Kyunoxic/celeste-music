@@ -1,0 +1,41 @@
+{
+  "name": "celeste",
+  "version": "1.0.0",
+  "description": "An animal-crossing themed music bot",
+  "scripts": {
+    "start": "npm run build && node dist/src/main.js",
+    "build": "npm run build-ts",
+    "test": "jest --forceExit --coverage --verbose",
+    "lint": "eslint \"**/*.ts\"",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "debug": "npm run build && npm run watch-debug"
+  },
+  "author": "Cas-E",
+  "license": "AGPL-3.0-only",
+  "devDependencies": {
+    "@types/common-tags": "^1.8.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "jest": "^27.0.3",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.5.0",
+    "common-tags": "^1.8.0",
+    "discord-player": "^4.1.0",
+    "discord.js": "^12.5.3",
+    "discord.js-commando": "^0.12.3",
+    "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.3.0",
+    "js-video-url-parser": "^0.4.3",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2"
+  },
+  "eslintIgnore": [
+    "dist/",
+    "node_modules/",
+    "**/*.d.ts"
+  ]
+}
