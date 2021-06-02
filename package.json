@@ -31,7 +31,9 @@
     "ffmpeg-static": "^4.3.0",
     "js-video-url-parser": "^0.4.3",
     "sqlite": "^4.0.23",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "ytdl-core": "^4.8.2",
+    "ytpl": "^2.2.1"
   },
   "eslintIgnore": [
     "dist/",
