@@ -6,12 +6,12 @@ export class YoutubeUrlArgumentType extends ArgumentType {
         super(client, 'youtube-url');
     }
 
-    validate(value: string, msg: CommandoMessage, arg: Argument) {
+    validate(value: string, msg: CommandoMessage, arg: Argument): boolean {
         const parsedValue = urlParser.parse(value);
         return Boolean(parsedValue) && parsedValue?.provider === 'youtube';
     }
 
-    parse(value: string) {
+    parse(value: string): string {
         return value;
     }
 }

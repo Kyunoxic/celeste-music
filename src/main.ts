@@ -1,12 +1,14 @@
 //Imports
 import {Command, CommandGroup, CommandoGuild, CommandoMessage} from "discord.js-commando";
-import {Player} from "discord-player";
+import {Message} from "discord.js";
+import {Player, Track} from "discord-player";
 import {Database, open} from "sqlite";
 import {config} from "dotenv";
 import {oneLine} from "common-tags";
 import path from "path";
 import sqlite3 from "sqlite3";
 import commando from 'discord.js-commando';
+import {MusicEmbeds} from "./components/musicEmbed";
 
 const env = config();
 const client = new commando.Client({
@@ -20,22 +22,18 @@ if(client == null) {
     process.exit(1);
 }
 
-client.player = new Player(client, {
-    ytdlDownloadOptions: {
-        quality: 'highestaudio'
-    },
-    leaveOnEnd: true,
-    leaveOnEndCooldown: 30000,
-    leaveOnStop: true,
-    leaveOnEmpty: true,
-    autoSelfDeaf: false
-});
-
 client?.on('error', console.error)
     .on('warn', console.warn)
     .on('debug', console.log)
     .on('ready', () => {
         console.log(`Client ready; logged in as ${client?.user?.username}#${client?.user?.discriminator} (${client?.user?.id})`);
+        client.user?.setPresence({
+            status: 'idle',
+            activity: {
+                type: 'LISTENING',
+                name: 'to nature'
+            }
+        });
     })
     .on('disconnect', () => { console.warn('Disconnected!'); })
     .on('commandError', (cmd: Command, err: Error, msg: CommandoMessage, args: any, pattern: boolean) => {
@@ -71,6 +69,27 @@ client?.on('error', console.error)
 		`);
     });
 
+client.player = new Player(client, {
+    ytdlDownloadOptions: {
+        quality: 'highestaudio'
+    },
+    leaveOnEnd: true,
+    leaveOnEndCooldown: 30000,
+    leaveOnStop: true,
+    leaveOnEmpty: true,
+    autoSelfDeaf: true
+});
+
+client.player
+    .on('error', (err: string, msg: Message) => {
+        console.error(oneLine`
+                    Playback Error: ${err} // Trigger: ${msg.content}
+                `);
+    })
+    .on('trackStart', (msg: CommandoMessage, track: Track) => {
+        msg.say(MusicEmbeds.createPlayEmbed(track));
+    });
+
 client?.setProvider(
     open({
         filename: 'database.db',
@@ -89,3 +108,12 @@ client?.registry
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
 client?.login(process.env.BOT_SECRET);
+
+// Useful for automatic breakpoints on console logs
+// var _log = console.log.bind(console);
+//
+// // es6
+// console.log = (...args) => {
+//     _log(...args);
+//     debugger;
+// }
