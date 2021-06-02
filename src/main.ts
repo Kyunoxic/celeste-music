@@ -2,13 +2,13 @@
 import {Command, CommandGroup, CommandoGuild, CommandoMessage} from "discord.js-commando";
 import {Message} from "discord.js";
 import {Player, Track} from "discord-player";
+import {MusicEmbeds} from "./components/musicEmbed";
 import {Database, open} from "sqlite";
 import {config} from "dotenv";
 import {oneLine} from "common-tags";
 import path from "path";
 import sqlite3 from "sqlite3";
 import commando from 'discord.js-commando';
-import {MusicEmbeds} from "./components/musicEmbed";
 
 const env = config();
 const client = new commando.Client({
@@ -31,7 +31,7 @@ client?.on('error', console.error)
             status: 'idle',
             activity: {
                 type: 'LISTENING',
-                name: 'to nature'
+                name: 'nature'
             }
         });
     })
@@ -101,7 +101,7 @@ client?.registry
     .registerGroups([
         ['admin', 'Administration Commands'],
         ['music', 'Music Commands'],
-        ['dev', 'Developer Commands']
+        // ['dev', 'Developer Commands']
     ])
     .registerDefaults()
     .registerTypesIn(path.join(__dirname, 'types'))
