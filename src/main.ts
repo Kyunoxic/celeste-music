@@ -103,7 +103,12 @@ client?.registry
         ['music', 'Music Commands'],
         // ['dev', 'Developer Commands']
     ])
-    .registerDefaults()
+    .registerDefaultTypes()
+    .registerDefaultGroups()
+    .registerDefaultCommands({
+        unknownCommand: false,
+        eval: false
+    })
     .registerTypesIn(path.join(__dirname, 'types'))
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
