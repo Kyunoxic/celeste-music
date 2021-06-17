@@ -10,6 +10,7 @@ module.exports = class ResumeCommand extends Command {
             examples: ['resume'],
             guildOnly: true,
             clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
+            userPermissions: ['ADMINISTRATOR', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'MANAGE_GUILD'],
             throttling: {
                 usages: 4,
                 duration: 30

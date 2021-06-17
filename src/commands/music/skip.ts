@@ -39,9 +39,13 @@ module.exports = class SkipCommand extends Command {
         if(!player.getQueue(msg)) return msg.say('There is nothing playing.');
 
         if(msg.deletable) msg.delete();
-        const embed = MusicEmbeds.createSkipEmbed(msg.author, player.nowPlaying(msg));
-        await player.skip(msg);
+        if(msg.author.id === player.nowPlaying(msg).requestedBy.id || msg.member.hasPermission(['ADMINISTRATOR', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'MANAGE_GUILD'])) {
+            const embed = MusicEmbeds.createSkipEmbed(msg.author, player.nowPlaying(msg));
+            await player.skip(msg);
 
-        return msg.say(embed);
+            return msg.say(embed);
+        } else {
+            return msg.say(MusicEmbeds.noPermissionsEmbed().setDescription('You cannot skip this song!'));
+        }
     }
 };

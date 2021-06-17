@@ -10,6 +10,7 @@ module.exports = class ShuffleCommand extends Command {
             examples: ['shuffle'],
             guildOnly: true,
             clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
+            userPermissions: ['ADMINISTRATOR', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'MANAGE_GUILD'],
             throttling: {
                 usages: 4,
                 duration: 60

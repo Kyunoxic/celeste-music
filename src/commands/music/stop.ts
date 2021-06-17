@@ -12,6 +12,7 @@ module.exports = class StopCommand extends Command {
             examples: ['stop'],
             guildOnly: true,
             clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
+            userPermissions: ['ADMINISTRATOR', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'MANAGE_GUILD'],
             throttling: {
                 usages: 1,
                 duration: 20

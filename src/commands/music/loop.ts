@@ -11,6 +11,7 @@ module.exports = class LoopCommand extends Command {
             examples: ['loop', 'loop song'],
             guildOnly: true,
             clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
+            userPermissions: ['ADMINISTRATOR', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'MANAGE_GUILD'],
             throttling: {
                 usages: 4,
                 duration: 30

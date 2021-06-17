@@ -114,4 +114,11 @@ export class MusicEmbeds {
                 + `${trackList}\n\n`
                 + `${queue.tracks.length > 5 ? `And **${queue.tracks.length - 5}** other songs...` : ``}`)
     }
+
+    static noPermissionsEmbed() : MessageEmbed {
+        return new MessageEmbed()
+            .setColor('red')
+            .setTimestamp(Date.now())
+            .setTitle(`Missing permissions!`)
+    }
 }
