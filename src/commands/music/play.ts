@@ -1,5 +1,6 @@
 import {CommandoClient, Command, CommandoMessage} from 'discord.js-commando';
 import {MusicEmbeds} from "../../components/musicEmbed";
+import ytdl from "ytdl-core";
 
 module.exports = class PlayCommand extends Command {
     constructor(client: CommandoClient) {
@@ -33,7 +34,11 @@ module.exports = class PlayCommand extends Command {
 
         const player = msg.client.player;
         if(player == null) return await msg.reply('This should never happen. Contact the bot owner.');
-        await player.play(msg, args.url, true);
+
+        const videoInfo = await ytdl.getBasicInfo(args.url, {
+            lang: 'UK'
+        })
+        await player.play(msg, videoInfo.videoDetails.title, true);
 
         if(msg.deletable) msg.delete();
         if(player.getQueue(msg).tracks.length > 1) {

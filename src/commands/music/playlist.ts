@@ -57,7 +57,7 @@ module.exports = class PlaylistCommand extends Command {
         });
 
         for (const item of playlist.items) {
-            await player.play(msg, item.url, true);
+            await player.play(msg, item.title, true);
         }
 
         if(msg.deletable) msg.delete();
